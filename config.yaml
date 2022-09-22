@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Installs the latest python3 and pip3 in Ubuntu
+    apt:
+      name:
+        - python3
+      state: latest
+    when: ansible_distribution == "Ubuntu"    
+  - name: Installs the latest python3 and pip3 in CentOS
+    yum:
+      name:
+        - python3
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+  - name: use python3 as default python in Ubuntu
+    apt:
+      name:
+        - python3
+      state: present
+    when: ansible_distribution == "Ubuntu"
+  - name: use python3 as default python in CentOS
+    yum:
+      name:
+        - python3
+      state: present
+    when: ansible_distribution == "CentOS"
